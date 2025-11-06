@@ -1,25 +1,63 @@
-import React from 'react'
-import { Routes, Route } from 'react-router-dom'
-import HomePage from './pages/HomePage'
-import ProductPage from './pages/ProductPage'
-import CartPage from './pages/CartPage'
-import CheckoutPage from './pages/CheckoutPage'
-import NavBar from './components/NavBar'
+// src/App.jsx
+import React, { useEffect, useState } from "react";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
+import HomePage from "./pages/HomePage";
+import NavBar from "./components/NavBar";
+import CartPage from "./pages/CartPage"; // ✅ добавлено
 
+// ✅ Переносим выше
+const ProtectedRoute = ({ children }) => {
+  const token = localStorage.getItem("token");
+  return token ? children : <Navigate to="/login" replace />;
+};
 
 export default function App() {
-return (
-<div className="min-h-screen flex flex-col">
-<NavBar />
-<main className="container mx-auto px-4 py-6 flex-1">
-<Routes>
-<Route path="/" element={<HomePage />} />
-<Route path="/product/:id" element={<ProductPage />} />
-<Route path="/cart" element={<CartPage />} />
-<Route path="/checkout" element={<CheckoutPage />} />
-</Routes>
-</main>
-<footer className="bg-white border-t py-4 text-center">© Online Store</footer>
-</div>
-)
+  const location = useLocation();
+  const [token, setToken] = useState(localStorage.getItem("token"));
+
+  useEffect(() => {
+    const handleStorageChange = () => setToken(localStorage.getItem("token"));
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
+
+  return (
+    <div className="min-h-screen flex flex-col bg-purple-100">
+      {token && !["/login", "/register"].includes(location.pathname) && (
+        <NavBar />
+      )}
+
+      <main className="container mx-auto px-4 py-6 flex-1">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              token ? <Navigate to="/home" replace /> : <Navigate to="/login" replace />
+            }
+          />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route
+            path="/home"
+            element={
+              <ProtectedRoute>
+                <HomePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/cart"
+            element={
+              <ProtectedRoute>
+                <CartPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </main>
+    </div>
+  );
 }
