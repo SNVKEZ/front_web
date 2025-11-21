@@ -5,12 +5,9 @@ import { useCart } from "../context/CartContext";
 export default function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { state } = useCart(); // 🛒 получаем данные корзины
+  const { state } = useCart(); // 🛒 корзина
 
-  // ❌ Не показываем navbar на /login и /register
-  if (["/login", "/register"].includes(location.pathname)) {
-    return null;
-  }
+  if (["/login", "/register"].includes(location.pathname)) return null;
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -32,6 +29,14 @@ export default function Navbar() {
           }`}
         >
           Home
+        </Link>
+        <Link
+          to="/orders"
+          className={`hover:text-purple-600 ${
+            location.pathname === "/orders" ? "text-purple-700 font-semibold" : ""
+          }`}
+        >
+          Orders
         </Link>
         <Link
           to="/cart"

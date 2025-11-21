@@ -6,6 +6,7 @@ import RegisterPage from "./pages/RegisterPage";
 import HomePage from "./pages/HomePage";
 import NavBar from "./components/NavBar";
 import CartPage from "./pages/CartPage"; // ✅ добавлено
+import OrdersPage from "./pages/OrdersPage";
 
 // ✅ Переносим выше
 const ProtectedRoute = ({ children }) => {
@@ -55,6 +56,14 @@ export default function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+  path="/orders"
+  element={
+    <ProtectedRoute>
+      <OrdersPage />
+    </ProtectedRoute>
+  }
+/>
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>

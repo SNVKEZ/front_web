@@ -13,11 +13,14 @@ export default function RegisterPage() {
     setError("");
 
     try {
-      await registerUser({ username, password });
+      // Добавляем роль USER прямо на фронте
+      await registerUser({ username, password, role: "USER" });
       navigate("/login");
     } catch (err) {
       console.error(err);
-      setError("Ошибка регистрации");
+      setError(
+        err.response?.data?.message || "Ошибка регистрации"
+      );
     }
   };
 
@@ -43,6 +46,7 @@ export default function RegisterPage() {
           className="border w-full p-2 mb-4 rounded"
           required
         />
+
         <input
           type="password"
           placeholder="Пароль"
