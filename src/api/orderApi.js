@@ -7,7 +7,7 @@ export async function createOrder(orderData) {
       "Content-Type": "application/json",
       ...(token ? { Authorization: `Bearer ${token}` } : {}),
     },
-    body: JSON.stringify(orderData), // { product, quantity }
+    body: JSON.stringify(orderData),
   });
 
   if (!res.ok) {

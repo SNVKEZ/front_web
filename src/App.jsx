@@ -1,14 +1,12 @@
-// src/App.jsx
 import React, { useEffect, useState } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import HomePage from "./pages/HomePage";
 import NavBar from "./components/NavBar";
-import CartPage from "./pages/CartPage"; // ✅ добавлено
+import CartPage from "./pages/CartPage"; 
 import OrdersPage from "./pages/OrdersPage";
 
-// ✅ Переносим выше
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem("token");
   return token ? children : <Navigate to="/login" replace />;

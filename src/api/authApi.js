@@ -5,17 +5,14 @@ const authAPI = axios.create({
   headers: { "Content-Type": "application/json" },
 });
 
-// ✅ Регистрация
 export async function registerUser(data) {
   const res = await authAPI.post("/registration", data);
   return res.data;
 }
 
-// ✅ Авторизация
 export async function loginUser(data) {
   const res = await authAPI.post("/login", data);
 
-  // 🧠 Получаем токен из тела или заголовка
   let token =
     res.data.token ||
     res.data.Authorization ||
@@ -24,14 +21,11 @@ export async function loginUser(data) {
 
   if (!token) throw new Error("Токен не получен");
 
-  // 🧹 Убираем префикс Bearer, если есть
   if (token.startsWith("Bearer ")) {
     token = token.substring(7);
   }
 
-  // 💾 Сохраняем токен под ключом "token"
   localStorage.setItem("token", token);
-
   return token;
 }
 

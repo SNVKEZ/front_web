@@ -5,7 +5,6 @@ const inventoryAPI = axios.create({
   headers: { "Content-Type": "application/json" },
 });
 
-// 🔐 Добавляем токен в каждый запрос
 inventoryAPI.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
@@ -17,7 +16,6 @@ inventoryAPI.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// 📦 Получить все товары
 export async function fetchProducts() {
   const res = await inventoryAPI.get("/products");
   return res.data;

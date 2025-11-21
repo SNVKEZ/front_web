@@ -1,4 +1,3 @@
-// src/context/CartContext.jsx
 import React, { createContext, useContext, useReducer, useEffect } from "react";
 
 const CartContext = createContext();
@@ -8,7 +7,7 @@ const initialState = {
 };
 
 function reducer(state, action) {
-  let updatedItems = []; // ✅ Объявляем заранее, чтобы не было ReferenceError
+  let updatedItems = [];
 
   switch (action.type) {
     case "ADD": {

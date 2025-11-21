@@ -13,7 +13,6 @@ export default function RegisterPage() {
     setError("");
 
     try {
-      // Добавляем роль USER прямо на фронте
       await registerUser({ username, password, role: "USER" });
       navigate("/login");
     } catch (err) {

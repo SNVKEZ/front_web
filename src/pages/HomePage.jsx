@@ -41,8 +41,8 @@ export default function HomePage() {
         {products.map((product) => (
           <ProductCard key={product.id} product={{
             id: product.id,
-            name: product.product,  // маппим поле product -> name
-            price: product.cost,    // маппим cost -> price
+            name: product.product,  
+            price: product.cost,   
             description: product.description,
             image: product.image
           }} />

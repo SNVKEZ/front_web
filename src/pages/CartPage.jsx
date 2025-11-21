@@ -17,15 +17,14 @@ export default function CartPage() {
     setLoading(true);
 
     try {
-      // Пробегаем по всем товарам и отправляем каждый как отдельный заказ
       for (const item of state.items) {
         await createOrder({
   product: item.name,
   quantity: item.qty
-});// Передаем name как строку и qty как число
+});
       }
 
-      dispatch({ type: "CLEAR" }); // очищаем корзину
+      dispatch({ type: "CLEAR" }); 
       navigate("/home");
     } catch (err) {
       console.error(err);

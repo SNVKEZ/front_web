@@ -1,11 +1,10 @@
-// src/components/Navbar.jsx
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 
 export default function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { state } = useCart(); // 🛒 корзина
+  const { state } = useCart(); 
 
   if (["/login", "/register"].includes(location.pathname)) return null;
 
