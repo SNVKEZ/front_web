@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const inventoryAPI = axios.create({
-  baseURL: "http://localhost:8084/inventory",
+  baseURL: `${import.meta.env.VITE_INVENTORY_URL}/inventory`,
   headers: { "Content-Type": "application/json" },
 });
 

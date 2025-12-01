@@ -1,7 +1,7 @@
 export async function createOrder(orderData) {
   const token = localStorage.getItem("token");
 
-  const res = await fetch("http://localhost:8082/orders/create_order", {
+  const res = await fetch(`${import.meta.env.VITE_ORDER_URL}/orders/create_order`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -20,7 +20,7 @@ export async function fetchOrders() {
   const token = localStorage.getItem("token");
 
   const res = await fetch(
-    "http://localhost:8082/orders/get_orders_by_name",
+    `${import.meta.env.VITE_ORDER_URL}/orders/get_orders_by_name`,
     {
       method: "GET",
       headers: {
