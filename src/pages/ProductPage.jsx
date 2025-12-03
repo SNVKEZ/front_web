@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { fetchProduct } from '../api/inventoryApi'
+import { fetchProducts } from '../api/inventoryApi'
 import { useCart } from '../context/CartContext'
 import Loader from '../components/Loader'
 

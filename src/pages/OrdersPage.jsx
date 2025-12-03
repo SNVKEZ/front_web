@@ -21,7 +21,7 @@ export default function OrdersPage() {
     loadOrders();
   }, []);
 
-  if (loading) return <p className="text-center py-8">Загрузка...</p>;
+ 
   if (error) return <p className="text-center py-8 text-red-500">{error}</p>;
 
   return (
